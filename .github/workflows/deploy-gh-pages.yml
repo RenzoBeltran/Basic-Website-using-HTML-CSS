@@ -16,7 +16,7 @@ jobs:
       - name: Validate HTML
         uses: anishathalye/proof-html@v2
         with:
-        directory: .
+          directory: .
 
   deploy:
     runs-on: ubuntu-latest
