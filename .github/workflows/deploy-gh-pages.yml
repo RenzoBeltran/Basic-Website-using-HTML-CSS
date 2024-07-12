@@ -6,6 +6,44 @@ on:
       - master
 
 jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate HTML
+        uses: chrisdaish/html-validator-action@v1
+        with:
+          file: ./index.html
+
+  check-bundle-size:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check bundle size
+        uses: kaliber5/ember-cli-bundle-analyzer-action@v1
+        with:
+          files: |
+            **/*.js
+            **/*.css
+
+  accessibility:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run pa11y
+        uses: actions-pa11y/pa11y-action@master
+        with:
+          startUrl: ./index.html
+
   deploy:
     runs-on: ubuntu-latest
     steps:
